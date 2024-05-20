@@ -30,8 +30,6 @@ def build_model(args):
             print(f"Found user input weights, using {model['ws']}")
         else:
             raise ValueError(f"Provided weights file doesn't exist. File not found error: {model['ws']}")
-    if args.loss:
-        model['params']['loss'] = args.loss
     return model
 
 def model_setup(model_info):
@@ -62,112 +60,6 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    # parser.add_argument(
-    #     "-i",
-    #     "--inputFile",
-    #     type=str,
-    #     default="data/nElinks_5/",
-    #     dest="inputFile",
-    #     help="input TSG files",
-    # )
-    # parser.add_argument(
-    #     "-o",
-    #     "--odir",
-    #     type=str,
-    #     default="output/",
-    #     dest="odir",
-    #     help="output directory",
-    # )
-    # parser.add_argument(
-    #     "--epochs",
-    #     type=int,
-    #     default=200,
-    #     dest="epochs",
-    #     help="number of epochs to train",
-    # )
-    # parser.add_argument(
-    #     "--nELinks",
-    #     type=int,
-    #     default=5,
-    #     dest="nElinks",
-    #     help="n of active transceiver e-links eTX",
-    # )
-    # parser.add_argument(
-    #     "--evalOnly",
-    #     action="store_true",
-    #     default=False,
-    #     dest="evalOnly",
-    #     help="only evaluate the NN on the input sample, no train",
-    # )
-    parser.add_argument(
-        "--AEonly", type=int, default=1, dest="AEonly", help="run only AE algo"
-    )
-    # parser.add_argument(
-    #     "--nrowsPerFile",
-    #     type=int,
-    #     default=5000000,
-    #     dest="nrowsPerFile",
-    #     help="load nrowsPerFile in a directory",
-    # )
-    # parser.add_argument(
-    #     "--noHeader",
-    #     action="store_true",
-    #     default=False,
-    #     dest="noHeader",
-    #     help="input data has no header",
-    # )
-    # parser.add_argument(
-    #     "--rescaleInputToMax",
-    #     action="store_true",
-    #     default=False,
-    #     dest="rescaleInputToMax",
-    #     help="rescale the input images so the maximum deposit is 1. Else normalize",
-    # )
-    # parser.add_argument(
-    #     "--rescaleOutputToMax",
-    #     action="store_true",
-    #     default=False,
-    #     dest="rescaleOutputToMax",
-    #     help="rescale the output images to match the initial sum of charge",
-    # )
-    # parser.add_argument(
-    #     "--maskPartials",
-    #     action="store_true",
-    #     default=False,
-    #     dest="maskPartials",
-    #     help="mask partial modules",
-    # )
-    # parser.add_argument(
-    #     "--maskEnergies",
-    #     action="store_true",
-    #     default=False,
-    #     dest="maskEnergies",
-    #     help="Mask energy fractions <= 0.05",
-    # )
-    # parser.add_argument(
-    #     "--saveEnergy",
-    #     action="store_true",
-    #     default=False,
-    #     dest="saveEnergy",
-    #     help="save SimEnergy from input data",
-    # )
-    # parser.add_argument(
-    #     "--double",
-    #     action="store_true",
-    #     default=False,
-    #     dest="double",
-    #     help="test PU400 by combining PU200 events",
-    # )
-    # parser.add_argument(
-    #     "--skipPlot",
-    #     action="store_true",
-    #     default=False,
-    #     dest="skipPlot",
-    #     help="skip the plotting step",
-    # )
-    parser.add_argument(
-        "--loss", type=str, default=None, dest="loss", help="force loss function to use"
-    )
     parser.add_argument(
         "--model",
         type=str,
