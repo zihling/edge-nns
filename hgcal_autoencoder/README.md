@@ -12,7 +12,7 @@ To evaluate the model, download the dataset [here](https://cseweb.ucsd.edu/~owen
 
 ## Load the model
 We provide a script to load the model for further evaluation: `./scripts/load_model.sh`. 
-No need to download the dataset for loading the model.
+No need to download the dataset to load the model.
 
 To load the Medium Pareto model, run:
 ```
