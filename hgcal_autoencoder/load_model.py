@@ -1,36 +1,36 @@
 import os
 import argparse
-from pathlib import Path
 
 from denseCNN import denseCNN
 from qDenseCNN import qDenseCNN
 
-def build_model(args):
+def build_model(model_name, pretrained_model=None):
     # import network architecture and loss function
     from networks import networks_by_name
     # select models to run
-    model = None
-    if args.model != "":
+    model_info = None
+    if model_name != "":
         for n in networks_by_name:
-            if n["name"] == args.model:
-                model = n
-    if model is None:
+            if n["name"] == model_name:
+                model_info = n
+                break
+    if model_info is None:
         raise ValueError("No model specified. Check --model for correctness.")
         
     nBits_encod = dict()
     nBits_encod  = {'total':  9, 'integer': 1,'keep_negative':0} # 0 to 2 range, 8 bit decimal 
         
-    if not 'nBits_encod' in model['params'].keys():
-        model['params'].update({'nBits_encod':nBits_encod})
+    if not 'nBits_encod' in model_info['params'].keys():
+        model_info['params'].update({'nBits_encod':nBits_encod})
             
     # re-use trained weights 
-    model['ws'] = args.pretrained_model
-    if model['ws'] != "":
-        if os.path.exists(model['ws']):
-            print(f"Found user input weights, using {model['ws']}")
+    model_info['ws'] = pretrained_model
+    if model_info['ws'] != None:
+        if os.path.exists(model_info['ws']):
+            print(f"Found user input weights, using {model_info['ws']}")
         else:
-            raise ValueError(f"Provided weights file doesn't exist. File not found error: {model['ws']}")
-    return model
+            raise ValueError(f"Provided weights file doesn't exist. File not found error: {model_info['ws']}")
+    return model_info
 
 def model_setup(model_info):
     if model_info["isQK"]:
@@ -43,18 +43,19 @@ def model_setup(model_info):
     m.init()
     return m
 
-
-def main(args):
+def load_model(model_name, pretrained_model=None):
     # Build model
-    model_info = build_model(args)
+    model_info = build_model(model_name, pretrained_model)
     model = model_setup(model_info)
     m_autoCNN, m_autoCNNen = model.get_models()
-    model_info["m_autoCNN"] = m_autoCNN
-    model_info["m_autoCNNen"] = m_autoCNNen # encoder only
-    if model_info["ws"] == "":
+    if pretrained_model and model_info["ws"] == "":
         raise RuntimeError("No weights provided to preload into the model!")
+    return m_autoCNNen
 
-    print(m_autoCNNen.summary())
+
+def main(args):
+    model = load_model(args.model, pretrained_model=args.pretrained_model)
+    print(model.summary())
     print("Success!")
 
 
@@ -70,7 +71,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--pretrained-model",
         type=str,
-        default="",
+        default=None,
         help="path to pretrained model .hdf5 file",
     )
 
