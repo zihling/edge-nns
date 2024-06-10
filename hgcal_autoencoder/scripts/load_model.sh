@@ -19,6 +19,6 @@ else
 	echo "Error"
 fi
 
-python3 load_model.py \
+python load_model.py \
 	--model $MODEL_NAME \
 	--pretrained-model $PRETRAINED_MODEL
