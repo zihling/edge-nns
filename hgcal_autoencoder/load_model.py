@@ -46,15 +46,15 @@ def model_setup(model_info):
 def load_model(model_name, pretrained_model=None):
     # Build model
     model_info = build_model(model_name, pretrained_model)
-    model = model_setup(model_info)
-    m_autoCNN, m_autoCNNen = model.get_models()
+    qdnn_model = model_setup(model_info)
+    m_autoCNN, m_autoCNNen = qdnn_model.get_models()
     if pretrained_model and model_info["ws"] == "":
         raise RuntimeError("No weights provided to preload into the model!")
-    return m_autoCNNen
+    return m_autoCNNen, qdnn_model
 
 
 def main(args):
-    model = load_model(args.model, pretrained_model=args.pretrained_model)
+    model, _ = load_model(args.model, pretrained_model=args.pretrained_model)
     print(model.summary())
     print("Success!")
 

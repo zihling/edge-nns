@@ -8,7 +8,7 @@ Models provided:
 * Large Pareto
 
 ## Dataset
-To evaluate the model, download the dataset [here](https://cseweb.ucsd.edu/~oweng/hgcal_dataset/).
+To evaluate the model, download the dataset [here](https://cseweb.ucsd.edu/~oweng/hgcal_dataset/keras_version/).
 
 ## Load the model
 We provide a script to load the model for further evaluation: `./scripts/load_model.sh`. 
@@ -27,4 +27,29 @@ To load the Small Pareto model, run:
 To load the Large Pareto model, run:
 ```
 ./scripts/load_model.sh 2
+```
+
+## Evaluate a model
+We provide a script for evaluating the Earth Mover's Distance (EMD) of the model: `./scripts/eval.sh`.
+Lower EMD is better. 
+A perfect autoencoder reconstruction of the data would yield an EMD of 0.
+
+Make sure to point the `.scripts/eval.sh`'s `DATASET` path to where you have stored the dataset, e.g.,
+```bash
+DATASET=./data/pickled--data_values--phys_values--EoL_dataset.pkl
+```
+
+To evaluate the Medium Pareto model, run:
+```bash
+./scripts/eval.sh 0
+```
+
+To evaluate the Small Pareto model, run:
+```bash
+./scripts/eval.sh 1
+```
+
+To evaluate the Large Pareto model, run:
+```bash
+./scripts/eval.sh 2
 ```
