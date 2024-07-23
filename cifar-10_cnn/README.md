@@ -14,6 +14,7 @@ To evaluate the model, download the dataset [here](https://www.cs.toronto.edu/~k
 We provide a script to load the model for further evaluation: `./scripts/load_model.sh`. 
 No need to download the dataset to load the model.
 
+### QKeras versions
 To load the Medium model, run:
 ```
 ./scripts/load_model.sh 0
@@ -27,3 +28,19 @@ To load the Small model, run:
 To load the Large model, run:
 ```
 ./scripts/load_model.sh 2
+```
+
+### FKeras versions
+To load the Medium model, run:
+```
+./scripts/load_model.sh 3
+```
+
+To load the Small model, run:
+```
+./scripts/load_model.sh 4
+```
+
+To load the Large model, run:
+```
+./scripts/load_model.sh 5
