@@ -23,4 +23,4 @@ dependencies:
     - setgpu
     - mplhep
     - opencv-python
-    - git+ssh://git@github.com/KastnerRG/fkeras.git#egg=fkeras
+    - git+https://git@github.com/KastnerRG/fkeras.git#egg=fkeras
