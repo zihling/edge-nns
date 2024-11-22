@@ -14,6 +14,7 @@ To evaluate the model, download the dataset [here](https://cseweb.ucsd.edu/~owen
 We provide a script to load the model for further evaluation: `./scripts/load_model.sh`. 
 No need to download the dataset to load the model.
 
+### QKeras versions
 To load the Medium Pareto model, run:
 ```
 ./scripts/load_model.sh 0
@@ -29,6 +30,22 @@ To load the Large Pareto model, run:
 ./scripts/load_model.sh 2
 ```
 
+### FKeras versions
+To load the Medium Pareto model, run:
+```
+./scripts/load_model.sh 3
+```
+
+To load the Small Pareto model, run:
+```
+./scripts/load_model.sh 4
+```
+
+To load the Large Pareto model, run:
+```
+./scripts/load_model.sh 5
+```
+
 ## Evaluate a model
 We provide a script for evaluating the Earth Mover's Distance (EMD) of the model: `./scripts/eval.sh`.
 Lower EMD is better. 
@@ -39,6 +56,7 @@ Make sure to point the `.scripts/eval.sh`'s `DATASET` path to where you have sto
 DATASET=./data/pickled--data_values--phys_values--EoL_dataset.pkl
 ```
 
+### FKeras versions
 To evaluate the Medium Pareto model, run:
 ```bash
 ./scripts/eval.sh 0

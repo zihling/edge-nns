@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MODEL_TYPE=$1
-DATASET=./data/eol_hgcal_dataset.pkl
+DATASET=./data/pickled--data_values--phys_values--EoL_dataset.pkl
 
 if [ $MODEL_TYPE -eq 0 ]; then # Medium model
     MODEL=8x8_c8_S2_tele_fqK_6bit
