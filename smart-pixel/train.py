@@ -2,13 +2,11 @@ import os
 import yaml
 import argparse
 
-import numpy as np
 import pandas as pd
 import tensorflow as tf
 from sklearn.preprocessing import StandardScaler
 
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
-from tensorflow.keras.layers import Activation, Dense, Input
 from tensorflow.keras.optimizers import Adam
 
 import models
