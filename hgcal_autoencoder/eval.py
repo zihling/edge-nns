@@ -10,6 +10,8 @@ from multiprocessing import Pool
 from metrics import emd_multiproc
 from load_model import load_model
 
+from telescope import telescopeMSE8x8
+
 def normalize(data, rescaleInputToMax=False, sumlog2=True):
     maxes = []
     sums = []
@@ -112,6 +114,12 @@ def main(args):
     autoencoder = qdnn_model.get_models()[0]
     # Predict
     cnn_deQ = autoencoder.predict(curr_val_input, batch_size=512)
+    # Compute loss
+    print("Computing loss...")
+    print(f"cnn_deQ shape: {cnn_deQ.shape}")
+    loss = telescopeMSE8x8(curr_val_input, cnn_deQ) # CORRECT
+    print(f"Loss: {loss.numpy().mean()}")
+    # Prep data for EMD calculation
     input_Q = curr_val_input
     input_calQ = qdnn_model.mapToCalQ(input_Q)  # shape = (N,48) in CALQ order
     output_calQ_fr = qdnn_model.mapToCalQ(cnn_deQ)  # shape = (N,48) in CALQ order
